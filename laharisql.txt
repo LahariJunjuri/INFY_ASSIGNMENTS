@@ -1,0 +1,357 @@
+SQL> spool
+currently spooling to d://laharisql.txt
+SQL> select last_name,salary from employees
+  2  where salary > 12000;
+
+LAST_NAME                     SALARY                                            
+------------------------- ----------                                            
+King                           24000                                            
+Kochhar                        17000                                            
+De Haan                        17000                                            
+Greenberg                      12008                                            
+Russell                        14000                                            
+Partners                       13500                                            
+Hartstein                      13000                                            
+Higgins                        12008                                            
+
+8 rows selected.
+
+SQL> spool d://laharisql.txt append
+SQL> select last_name,department_id from employees where employee_id=176;
+
+LAST_NAME                 DEPARTMENT_ID                                         
+------------------------- -------------                                         
+Taylor                               80                                         
+
+SQL> spool d://laharisql.txt append
+SQL> select last_name,salary from employees WHERE salary>12000 OR salary<5000;
+
+LAST_NAME                     SALARY                                            
+------------------------- ----------                                            
+King                           24000                                            
+Kochhar                        17000                                            
+De Haan                        17000                                            
+Austin                          4800                                            
+Pataballa                       4800                                            
+Lorentz                         4200                                            
+Greenberg                      12008                                            
+Khoo                            3100                                            
+Baida                           2900                                            
+Tobias                          2800                                            
+Himuro                          2600                                            
+
+LAST_NAME                     SALARY                                            
+------------------------- ----------                                            
+Colmenares                      2500                                            
+Nayer                           3200                                            
+Mikkilineni                     2700                                            
+Landry                          2400                                            
+Markle                          2200                                            
+Bissot                          3300                                            
+Atkinson                        2800                                            
+Marlow                          2500                                            
+Olson                           2100                                            
+Mallin                          3300                                            
+Rogers                          2900                                            
+
+LAST_NAME                     SALARY                                            
+------------------------- ----------                                            
+Gee                             2400                                            
+Philtanker                      2200                                            
+Ladwig                          3600                                            
+Stiles                          3200                                            
+Seo                             2700                                            
+Patel                           2500                                            
+Rajs                            3500                                            
+Davies                          3100                                            
+Matos                           2600                                            
+Vargas                          2500                                            
+Russell                        14000                                            
+
+LAST_NAME                     SALARY                                            
+------------------------- ----------                                            
+Partners                       13500                                            
+Taylor                          3200                                            
+Fleaur                          3100                                            
+Sullivan                        2500                                            
+Geoni                           2800                                            
+Sarchand                        4200                                            
+Bull                            4100                                            
+Dellinger                       3400                                            
+Cabrio                          3000                                            
+Chung                           3800                                            
+Dilly                           3600                                            
+
+LAST_NAME                     SALARY                                            
+------------------------- ----------                                            
+Gates                           2900                                            
+Perkins                         2500                                            
+Bell                            4000                                            
+Everett                         3900                                            
+McCain                          3200                                            
+Jones                           2800                                            
+Walsh                           3100                                            
+Feeney                          3000                                            
+OConnell                        2600                                            
+Grant                           2600                                            
+Whalen                          4400                                            
+
+LAST_NAME                     SALARY                                            
+------------------------- ----------                                            
+Hartstein                      13000                                            
+Higgins                        12008                                            
+
+57 rows selected.
+
+SQL> spool d://laharisql.txt append
+SQL> select last_name,job_id,hire_date from employees
+  2  WHERE last_name= 'Matos' OR 'Taylor'
+  3  ORDER BY hire_date;
+ORDER BY hire_date
+*
+ERROR at line 3:
+ORA-00920: invalid relational operator 
+
+
+SQL> select last_name,job_id,hire_date from employees
+  2  WHERE last_name= 'Matos' OR last_name= 'Taylor'
+  3  ORDER BY hire_date;
+
+LAST_NAME                 JOB_ID     HIRE_DATE                                  
+------------------------- ---------- ---------                                  
+Taylor                    SH_CLERK   24-JAN-06                                  
+Matos                     ST_CLERK   15-MAR-06                                  
+Taylor                    SA_REP     24-MAR-06                                  
+
+SQL> spool d://laharisql.txt append
+SQL> select last_name,department_id from employees
+  2  where department_id=20 OR separtment_id=50
+  3  ORDER BY last_name;
+where department_id=20 OR separtment_id=50
+                          *
+ERROR at line 2:
+ORA-00904: "SEPARTMENT_ID": invalid identifier 
+
+
+SQL> select last_name,department_id from employees
+  2  WHERE department_id=20 OR department_id=50
+  3  ORDER BY last_name;
+
+LAST_NAME                 DEPARTMENT_ID                                         
+------------------------- -------------                                         
+Atkinson                             50                                         
+Bell                                 50                                         
+Bissot                               50                                         
+Bull                                 50                                         
+Cabrio                               50                                         
+Chung                                50                                         
+Davies                               50                                         
+Dellinger                            50                                         
+Dilly                                50                                         
+Everett                              50                                         
+Fay                                  20                                         
+
+LAST_NAME                 DEPARTMENT_ID                                         
+------------------------- -------------                                         
+Feeney                               50                                         
+Fleaur                               50                                         
+Fripp                                50                                         
+Gates                                50                                         
+Gee                                  50                                         
+Geoni                                50                                         
+Grant                                50                                         
+Hartstein                            20                                         
+Jones                                50                                         
+Kaufling                             50                                         
+Ladwig                               50                                         
+
+LAST_NAME                 DEPARTMENT_ID                                         
+------------------------- -------------                                         
+Landry                               50                                         
+Mallin                               50                                         
+Markle                               50                                         
+Marlow                               50                                         
+Matos                                50                                         
+McCain                               50                                         
+Mikkilineni                          50                                         
+Mourgos                              50                                         
+Nayer                                50                                         
+OConnell                             50                                         
+Olson                                50                                         
+
+LAST_NAME                 DEPARTMENT_ID                                         
+------------------------- -------------                                         
+Patel                                50                                         
+Perkins                              50                                         
+Philtanker                           50                                         
+Rajs                                 50                                         
+Rogers                               50                                         
+Sarchand                             50                                         
+Seo                                  50                                         
+Stiles                               50                                         
+Sullivan                             50                                         
+Taylor                               50                                         
+Vargas                               50                                         
+
+LAST_NAME                 DEPARTMENT_ID                                         
+------------------------- -------------                                         
+Vollman                              50                                         
+Walsh                                50                                         
+Weiss                                50                                         
+
+47 rows selected.
+
+SQL> spool d://laharisql.txt append
+SQL> select last_name Employee, salary  Monthly Salary from employees
+  2  WHERE salary BETWEEN 5000 AND 12000
+  3  AND department_id =20 OR department_id=50;
+select last_name Employee, salary  Monthly Salary from employees
+                                           *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> select last_name Employee, salary  Monthly_Salary from employees
+  2  WHERE salary BETWEEN 5000 AND 12000
+  3  AND department_id =20 OR department_id=50;
+
+EMPLOYEE                  MONTHLY_SALARY                                        
+------------------------- --------------                                        
+Weiss                               8000                                        
+Fripp                               8200                                        
+Kaufling                            7900                                        
+Vollman                             6500                                        
+Mourgos                             5800                                        
+Nayer                               3200                                        
+Mikkilineni                         2700                                        
+Landry                              2400                                        
+Markle                              2200                                        
+Bissot                              3300                                        
+Atkinson                            2800                                        
+
+EMPLOYEE                  MONTHLY_SALARY                                        
+------------------------- --------------                                        
+Marlow                              2500                                        
+Olson                               2100                                        
+Mallin                              3300                                        
+Rogers                              2900                                        
+Gee                                 2400                                        
+Philtanker                          2200                                        
+Ladwig                              3600                                        
+Stiles                              3200                                        
+Seo                                 2700                                        
+Patel                               2500                                        
+Rajs                                3500                                        
+
+EMPLOYEE                  MONTHLY_SALARY                                        
+------------------------- --------------                                        
+Davies                              3100                                        
+Matos                               2600                                        
+Vargas                              2500                                        
+Taylor                              3200                                        
+Fleaur                              3100                                        
+Sullivan                            2500                                        
+Geoni                               2800                                        
+Sarchand                            4200                                        
+Bull                                4100                                        
+Dellinger                           3400                                        
+Cabrio                              3000                                        
+
+EMPLOYEE                  MONTHLY_SALARY                                        
+------------------------- --------------                                        
+Chung                               3800                                        
+Dilly                               3600                                        
+Gates                               2900                                        
+Perkins                             2500                                        
+Bell                                4000                                        
+Everett                             3900                                        
+McCain                              3200                                        
+Jones                               2800                                        
+Walsh                               3100                                        
+Feeney                              3000                                        
+OConnell                            2600                                        
+
+EMPLOYEE                  MONTHLY_SALARY                                        
+------------------------- --------------                                        
+Grant                               2600                                        
+Fay                                 6000                                        
+
+46 rows selected.
+
+SQL> spool d://laharisql.txt append
+SQL> select last_name ,job_id from employees where manager_id is null;
+
+LAST_NAME                 JOB_ID                                                
+------------------------- ----------                                            
+King                      AD_PRES                                               
+
+SQL> spool d://laharisql.txt append
+SQL> select last_name from employees
+  2  where last_name like '%a%' AND last_name like '%e%';
+
+LAST_NAME                                                                       
+-------------------------                                                       
+Baer                                                                            
+Bates                                                                           
+Colmenares                                                                      
+Davies                                                                          
+De Haan                                                                         
+Faviet                                                                          
+Fleaur                                                                          
+Gates                                                                           
+Hartstein                                                                       
+Markle                                                                          
+Nayer                                                                           
+
+LAST_NAME                                                                       
+-------------------------                                                       
+Partners                                                                        
+Patel                                                                           
+Philtanker                                                                      
+Raphaely                                                                        
+Sewall                                                                          
+Whalen                                                                          
+
+17 rows selected.
+
+SQL> spool off
+SQL> select last_name,salary,commission_pct from employees
+  2  where commission_pct=0.2;
+
+LAST_NAME                     SALARY COMMISSION_PCT                             
+------------------------- ---------- --------------                             
+Zlotkey                        10500             .2                             
+Olsen                           8000             .2                             
+Cambrault                       7500             .2                             
+Bloom                          10000             .2                             
+Fox                             9600             .2                             
+Taylor                          8600             .2                             
+Livingston                      8400             .2                             
+
+7 rows selected.
+
+SQL> spool d://laharisql.txt append
+SQL> select last_name from employees
+  2  where last_name like '__a';
+
+no rows selected
+
+SQL> where last_name like '--a';
+SP2-0734: unknown command beginning "where last..." - rest of line ignored.
+SQL> spool d://laharisql.txt append
+SQL> select last_name from employees
+  2  where last_name like '--a';
+
+no rows selected
+
+SQL> spool d://laharisql.txt append
+SQL> select last_name from employees
+  2  where last_name like '__a%';
+
+LAST_NAME                                                                       
+-------------------------                                                       
+Grant                                                                           
+Grant                                                                           
+Whalen                                                                          
+
+SQL> spool off
