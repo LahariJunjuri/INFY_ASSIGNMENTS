@@ -1,0 +1,345 @@
+SQL> spool
+currently spooling to d://plsql.txt
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  num1 number := 10;
+  3  num2 number := 20;
+  4  BEGIN
+  5  DECLARE
+  6  num_addition number;
+  7  BEGIN
+  8  num_addition := num1 + num2;
+  9  dbms_output.put_line('Addition is: ' || num_addition);
+ 10  END;  -- End of access num_addition variable
+ 11  END;
+ 12  /
+Addition is: 30                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> spool d://plsql.txt append
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  pi CONSTANT REAL := 3.14159;
+  3    radius REAL := 3;
+  4    area REAL := (pi * radius**2);
+  5  BEGIN
+  6  dbms_output.put_line(' PI: ' || pi || ' Radius: ' || radius);
+  7  dbms_output.put_line(' Area: ' || area);
+  8  END;
+  9  /
+PI: 3.14159 Radius: 3                                                           
+Area: 28.27431                                                                  
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> spool d://plsql.txt append
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2     no INTEGER(2) := 14;
+  3  BEGIN
+  4     IF ( no = 14 ) THEN
+  5        DBMS_OUTPUT.PUT_LINE('condition true');
+  6     END IF;
+  7  END;
+  8  /
+condition true                                                                  
+
+PL/SQL procedure successfully completed.
+
+SQL> spool d://plsql.txt append
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2     result CHAR(20) := 'second';
+  3  BEGIN
+  4     IF ( result = 'distinction' ) THEN
+  5        DBMS_OUTPUT.PUT_LINE('First Class with Distinction');
+  6     ELSIF ( result = 'first' ) THEN
+  7        DBMS_OUTPUT.PUT_LINE('First Class');
+  8     ELSIF ( result = 'second' ) THEN
+  9        DBMS_OUTPUT.PUT_LINE('Second Class');
+ 10     ELSIF ( result = 'third' ) THEN
+ 11        DBMS_OUTPUT.PUT_LINE('Third Class');
+ 12     ELSE
+ 13        DBMS_OUTPUT.PUT_LINE('Fail');
+ 14     END IF;
+ 15  END;
+ 16  /
+Second Class                                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> spool d://plsql.txt append
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  gender CHAR(20) := 'female';
+  3      result CHAR(20) := 'second';
+  4  BEGIN
+  5     IF ( gender = 'male' ) THEN
+  6        DBMS_OUTPUT.PUT_LINE('Gender Male Record Skip!');
+  7     ELSE
+  8     IF ( result = 'distinction' ) THEN
+  9        DBMS_OUTPUT.PUT_LINE('First Class with Distinction');
+ 10     ELSIF ( result = 'first' ) THEN
+ 11        DBMS_OUTPUT.PUT_LINE('First Class');
+ 12     ELSIF ( result = 'second' ) THEN
+ 13        DBMS_OUTPUT.PUT_LINE('Second Class');
+ 14     ELSIF ( result = 'third' ) THEN
+ 15        DBMS_OUTPUT.PUT_LINE('Third Class');
+ 16     ELSE
+ 17        DBMS_OUTPUT.PUT_LINE('Fail');
+ 18     END IF;
+ 19  END IF;
+ 20  END;
+ 21  /
+Second Class                                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> spool d://plsql.txt append
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2     no NUMBER := 5;
+  3  BEGIN
+  4  LOOP
+  5  DBMS_OUTPUT.PUT_LINE ('Inside value:  no = ' || no);
+  6      no := no -1;
+  7      IF no = 0 THEN
+  8        EXIT;
+  9      END IF;
+ 10      END LOOP;
+ 11      DBMS_OUTPUT.PUT_LINE('Outside loop end');
+ 12  END;
+ 13  /
+Inside value:  no = 5                                                           
+Inside value:  no = 4                                                           
+Inside value:  no = 3                                                           
+Inside value:  no = 2                                                           
+Inside value:  no = 1                                                           
+Outside loop end                                                                
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> spool d://plsql.txt append
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2     no NUMBER := 0;
+  3  BEGIN
+  4  WHILE no < 10 LOOP
+  5      no := no + 1;
+  6      END LOOP;
+  7      DBMS_OUTPUT.PUT_LINE('Sum :' || no);
+  8  END;
+  9  /
+Sum :10                                                                         
+
+PL/SQL procedure successfully completed.
+
+SQL> spool d://plsql.txt append
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2     no NUMBER := 5;
+  3  BEGIN
+  4  LOOP
+  5  DBMS_OUTPUT.PUT_LINE ('Inside value:  no = ' || no);
+  6      no := no -1;
+  7      IF no = 0 THEN
+  8        EXIT;
+  9      END IF;
+ 10      END LOOP;
+ 11      DBMS_OUTPUT.PUT_LINE('Outside loop end');   -- After EXIT control transfer this statement
+ 12  END;
+ 13  /
+Inside value:  no = 5                                                           
+Inside value:  no = 4                                                           
+Inside value:  no = 3                                                           
+Inside value:  no = 2                                                           
+Inside value:  no = 1                                                           
+Outside loop end                                                                
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> spool d://plsql.txt append
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2     no NUMBER := 0;
+  3  BEGIN
+  4  FOR no IN 1 .. 5 LOOP
+  5      DBMS_OUTPUT.PUT_LINE('Iteration : ' || no);
+  6  CONTINUE WHEN no = 4
+  7  DBMS_OUTPUT.PUT_LINE('CONTINUE WHEN EXECUTE Iteration : ' || no);
+  8    END LOOP;
+  9  END;
+ 10  /
+DBMS_OUTPUT.PUT_LINE('CONTINUE WHEN EXECUTE Iteration : ' || no);
+*
+ERROR at line 7:
+ORA-06550: line 7, column 1: 
+PLS-00103: Encountered the symbol "DBMS_OUTPUT" when expecting one of the 
+following: 
+* & - + ; / at mod remainder rem <an exponent (**)> and or || 
+multiset 
+The symbol "*" was substituted for "DBMS_OUTPUT" to continue. 
+
+
+SQL> 
+SQL> spool d://plsql.txt append
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  a number := 7;
+  3  BEGIN
+  4  CASE a
+  5  WHEN 1 THEN
+  6  DBMS_OUTPUT.PUT_LINE('value 1');
+  7  WHEN 2 THEN
+  8  DBMS_OUTPUT.PUT_LINE('value 2');
+  9  WHEN 3 THEN
+ 10  DBMS_OUTPUT.PUT_LINE('value 3');
+ 11  ELSE
+ 12  DBMS_OUTPUT.PUT_LINE('no matching CASE found');
+ 13  END CASE;
+ 14  END;
+ 15  /
+no matching CASE found                                                          
+
+PL/SQL procedure successfully completed.
+
+SQL> spool d://plsql.txt append
+SQL> SET SERVEROUTPUT ON
+SQL> CREATE OR REPLACE FUNCTION totalCustomers
+  2  RETURN number IS
+  3  total number(2) := 0;
+  4  BEGIN
+  5  SELECT count(*) into total
+  6  FROM customers;
+  7  RETURN total;
+  8  END;
+  9  /
+
+Warning: Function created with compilation errors.
+
+SQL> spool d://plsql.txt append
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  a number;
+  3  b number;
+  4  c number;
+  5  FUNCTION findMax(x IN number, y IN number)
+  6  RETURN number
+  7  IS
+  8  z number;
+  9  BEGIN
+ 10  IF x > y THEN
+ 11  z:= x;
+ 12  ELSE
+ 13  Z:= y;
+ 14  END IF;
+ 15  RETURN z;
+ 16  END;
+ 17  BEGIN
+ 18  a:= 23;
+ 19  b:= 45;
+ 20  c := findMax(a, b);
+ 21  dbms_output.put_line(' Maximum of (23,45): ' || c);
+ 22  END;
+ 23  /
+Maximum of (23,45): 45                                                          
+
+PL/SQL procedure successfully completed.
+
+SQL> spool d://plsql.txt append
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  num number;
+  3  factorial number;
+  4  FUNCTION fact(x number)
+  5  RETURN number
+  6  IS
+  7  f number;
+  8  BEGIN
+  9  IF x=0 THEN
+ 10  f := 1;
+ 11  ELSE
+ 12  f := x * fact(x-1);
+ 13  END IF;
+ 14  RETURN f;
+ 15  END;
+ 16  BEGIN
+ 17  num:= 6;
+ 18  factorial := fact(num);
+ 19  dbms_output.put_line(' Factorial '|| num || ' is ' || factorial);
+ 20  END;
+ 21  /
+Factorial 6 is 720                                                              
+
+PL/SQL procedure successfully completed.
+
+SQL> spool d://plsql.txt append
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  a number;
+  3  b number;
+  4  c number;
+  5  PROCEDURE findMin(x IN number, y IN number, z OUT number) IS
+  6  BEGIN
+  7  IF x < y THEN
+  8  z:= x;
+  9  ELSE
+ 10  z:= y;
+ 11  END IF;
+ 12  END;
+ 13  BEGIN
+ 14  a:= 23;
+ 15  b:= 45;
+ 16  findMin(a, b, c);
+ 17  dbms_output.put_line(' Minimum of (23, 45) : ' || c);
+ 18  END;
+ 19  /DECLARE
+ 20  a number;
+ 21  b number;
+ 22  c number;
+ 23  PROCEDURE findMin(x IN number, y IN number, z OUT number) IS
+ 24  BEGIN
+ 25  IF x < y THEN
+ 26  z:= x;
+ 27  ELSE
+ 28  z:= y;
+ 29  END IF;
+ 30  END;
+ 31  BEGIN
+ 32  a:= 23;
+ 33  b:= 45;
+ 34  findMin(a, b, c);
+ 35  dbms_output.put_line(' Minimum of (23, 45) : ' || c);
+ 36  END;
+ 37  /
+/DECLARE
+*
+ERROR at line 19:
+ORA-06550: line 19, column 1: 
+PLS-00103: Encountered the symbol "/"  
+
+
+SQL> spool d://plsql.txt append
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  a number;
+  3  PROCEDURE squareNum(x IN OUT number) IS
+  4  BEGIN
+  5  x := x * x;
+  6  END;
+  7  BEGIN
+  8  a:= 23;
+  9  squareNum(a);
+ 10  dbms_output.put_line(' Square of (23): ' || a);
+ 11  END;
+ 12  /
+Square of (23): 529                                                             
+
+PL/SQL procedure successfully completed.
+
+SQL> spool off
